@@ -27,5 +27,7 @@ cd TipCalculator
 
 ### Run and Build
 
+```bash
 dotnet build
 dotnet run
+```
