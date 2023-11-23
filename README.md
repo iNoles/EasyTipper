@@ -5,6 +5,7 @@ A simple cross-platform tip calculator built with .NET MAUI, allowing users to c
 ## Features
 
 - Calculate tip based on the bill amount and selected tip percentage.
+- Split the bill among multiple people.
 - Cross-platform: Runs on Android, iOS, and Windows using .NET MAUI.
 
 ## Screenshots
