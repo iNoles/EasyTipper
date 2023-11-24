@@ -15,6 +15,7 @@ A simple cross-platform tip calculator built with .NET MAUI, allowing users to c
 ## Getting Started
 
 ### Prerequisites
+- Install the latest version for .NET 8
 
 - Install [.NET MAUI workload](https://docs.microsoft.com/en-us/dotnet/maui/get-started/installation) on your development machine.
 
