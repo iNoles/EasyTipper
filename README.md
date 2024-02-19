@@ -1,4 +1,4 @@
-# TipCalcuator
+# TipCalculator
 
 A simple cross-platform tip calculator built with .NET MAUI, allowing users to calculate tips easily.
 
