@@ -1,4 +1,4 @@
-﻿namespace TipCalcuator;
+﻿namespace TipCalculator;
 
 public partial class App : Application
 {

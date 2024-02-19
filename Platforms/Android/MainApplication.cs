@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace TipCalcuator;
+namespace TipCalculator;
 
 [Application]
 public class MainApplication : MauiApplication

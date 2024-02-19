@@ -1,34 +1,41 @@
-﻿using System.Globalization;
+﻿using CheckBox = Microsoft.Maui.Controls.CheckBox;
 
-namespace TipCalcuator;
+namespace TipCalculator;
 
-public partial class MainPage
+using System.Globalization;
+
+public partial class MainPage : ContentPage
 {
-    private float _tipPercent = .15f;
     private int _split = 1;
+    private bool _roundUp;
     
     public MainPage()
     {
         InitializeComponent();
     }
-
-    private void OnEntryCompleted(object sender, EventArgs e)
-    {
-        CalculateAndDisplay();
-    }
-
+    
     private void CalculateAndDisplay()
     {
         var billAmountString = AmountEntry.Text;
-        if (!float.TryParse(billAmountString, NumberStyles.Any, CultureInfo.InvariantCulture, out var billAmount))
+        if (!double.TryParse(billAmountString, NumberStyles.Any, CultureInfo.InvariantCulture, out var billAmount))
         {
-            billAmount = 0f;
+            billAmount = 0.0;
+        }
+        
+        var tipPercentString = PercentEntry.Text;
+        if (!double.TryParse(tipPercentString, NumberStyles.Any, CultureInfo.InvariantCulture, out var tipPercent))
+        {
+            tipPercent = 0.0;
         }
 
-        var tipAmount = billAmount * _tipPercent;
-        var totalAmount = billAmount + _tipPercent;
+        var tipAmount = tipPercent / 100 * billAmount;
+        if (_roundUp)
+        {
+            tipAmount = Math.Ceiling(tipAmount);
+        }
+        var totalAmount = tipPercent / 100 + billAmount;
 
-        float splitAmount = 0;
+        var splitAmount = 0.0;
         if (_split == 1)
         {
             PersonLabel.IsVisible = false;
@@ -44,26 +51,32 @@ public partial class MainPage
         TipLabel.Text = tipAmount.ToString("C");
         TotalLabel.Text = totalAmount.ToString("C");
         PersonCurrencyLabel.Text = splitAmount.ToString("C");
-        PercentLabel.Text = _tipPercent.ToString("P0", CultureInfo.InvariantCulture);
     }
 
-    private void OnPlusButtonClicked(object sender, EventArgs e)
+    private void PercentEntry_OnCompleted(object? sender, EventArgs e)
     {
-        _tipPercent += 0.1f;
+        SemanticScreenReader.Announce(PercentEntry.Text);
         CalculateAndDisplay();
     }
 
-    private void OnNegativeButtonClicked(object sender, EventArgs e)
+    private void AmountEntry_OnCompleted(object? sender, EventArgs e)
     {
-        _tipPercent -= 0.1f;
+        SemanticScreenReader.Announce(AmountEntry.Text);
         CalculateAndDisplay();
     }
 
-    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    private void Picker_OnSelectedIndexChanged(object? sender, EventArgs e)
     {
-        var picker = (Picker)sender;
-        var selectedIndex = picker.SelectedIndex;
-        _split = selectedIndex + 1;
+        var picker = sender as Picker;
+        var selectedIndex = picker?.SelectedIndex;
+        _split = selectedIndex + 1 ?? 1;
+        CalculateAndDisplay();
+    }
+
+    private void CheckBox_OnCheckedChanged(object? sender, CheckedChangedEventArgs e)
+    {
+        var checkbox = sender as CheckBox;
+        _roundUp = checkbox?.IsChecked ?? false;
         CalculateAndDisplay();
     }
 }

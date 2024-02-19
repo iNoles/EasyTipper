@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace TipCalcuator;
+namespace TipCalculator;
 
 public static class MauiProgram
 {

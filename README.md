@@ -10,7 +10,7 @@ A simple cross-platform tip calculator built with .NET MAUI, allowing users to c
 
 ## Screenshots
 
-![TipCalcuator Demo](https://raw.githubusercontent.com/iNoles/TipCalcuator/main/screenshots/maui-desktop.png)
+![TipCalculator Demo](https://raw.githubusercontent.com/iNoles/TipCalculator/main/screenshots/maui-desktop.png)
 
 ## Getting Started
 

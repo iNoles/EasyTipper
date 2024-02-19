@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace TipCalcuator;
+namespace TipCalculator;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
