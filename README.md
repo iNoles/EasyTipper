@@ -1,12 +1,13 @@
 # TipCalculator
 
-A simple cross-platform tip calculator built with .NET MAUI, allowing users to calculate tips easily.
+A simple cross-platform tip calculator built with .NET MAUI. This application allows users to calculate tips based on the bill amount and selected tip percentage, and it can split the bill among multiple people.
 
 ## Features
 
-- Calculate tip based on the bill amount and selected tip percentage.
-- Split the bill among multiple people.
-- Cross-platform: Runs on Android, iOS, MacCatalyst, and Windows using .NET MAUI.
+- **Tip Calculation**: Calculates the tip amount based on the bill and selected tip percentage.
+- **Bill Splitting**: Allows users to split the total amount among multiple people.
+- **Cross-Platform**: Runs on Android, iOS, MacCatalyst, and Windows using .NET MAUI.
+- **Dynamic Input Handling**: Updates calculations in real-time as users adjust inputs.
 
 ## Screenshots
 

@@ -9,9 +9,9 @@
                 Spacing="5">
                 <Entry
                     x:Name="AmountEntry"
-                    Placeholder="Bill Amount"
+                    Placeholder="Enter Bill Amount"
                     Keyboard="Numeric"
-                    Completed="AmountEntry_OnCompleted"
+                    TextChanged="AmountEntry_OnTextChanged"
                 />
             </StackLayout>
             <StackLayout
@@ -19,9 +19,9 @@
                 Spacing="5">
                 <Entry
                     x:Name="PercentEntry"
-                    Placeholder="Tip Percentage"
+                    Placeholder="Enter Tip Percentage"
                     Keyboard="Numeric"
-                    Completed="PercentEntry_OnCompleted"
+                    TextChanged="PercentEntry_OnTextChanged"
                 />
             </StackLayout>
             <StackLayout

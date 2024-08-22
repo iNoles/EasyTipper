@@ -33,43 +33,51 @@ public partial class MainPage : ContentPage
         {
             tipAmount = Math.Ceiling(tipAmount);
         }
-        var totalAmount = tipPercent / 100 + billAmount;
 
-        var splitAmount = 0.0;
-        if (_split == 1)
-        {
-            PersonLabel.IsVisible = false;
-            PersonCurrencyLabel.IsVisible = false;
-        }
-        else
-        {
-            splitAmount = totalAmount / _split;
-            PersonLabel.IsVisible = true;
-            PersonCurrencyLabel.IsVisible = true;
-        }
-
+        // Total amount is the bill plus the tip
+        var totalAmount = billAmount + tipAmount;
+        
+        // Calculate the amount per person if splitting
+        var splitAmount = totalAmount / _split;
+        
+        // Update the UI labels
         TipLabel.Text = tipAmount.ToString("C");
         TotalLabel.Text = totalAmount.ToString("C");
-        PersonCurrencyLabel.Text = splitAmount.ToString("C");
+        
+         var isSplitting = _split > 1;
+         PersonLabel.IsVisible = isSplitting;
+         PersonCurrencyLabel.IsVisible = isSplitting;
+         
+         // Update the per-person amount label if splitting
+        if (isSplitting)
+        {
+            PersonCurrencyLabel.Text = splitAmount.ToString("C");
+        }
     }
-
-    private void PercentEntry_OnCompleted(object? sender, EventArgs e)
+    
+    private void PercentEntry_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        SemanticScreenReader.Announce(PercentEntry.Text);
         CalculateAndDisplay();
     }
-
-    private void AmountEntry_OnCompleted(object? sender, EventArgs e)
+        
+    private void AmountEntry_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        SemanticScreenReader.Announce(AmountEntry.Text);
         CalculateAndDisplay();
     }
 
     private void Picker_OnSelectedIndexChanged(object? sender, EventArgs e)
     {
-        var picker = sender as Picker;
-        var selectedIndex = picker?.SelectedIndex;
-        _split = selectedIndex + 1 ?? 1;
+       var picker = sender as Picker;
+       
+       // Ensure selectedIndex is not null before using it
+       if (picker?.SelectedIndex != null && picker.SelectedIndex >= 0)
+       {
+        _split = picker.SelectedIndex + 1;
+        }
+        else
+        {
+            _split = 1; // Default to 1 if the selection is invalid
+        }
         CalculateAndDisplay();
     }
 
