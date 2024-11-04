@@ -15,19 +15,24 @@ public partial class MainPage : ContentPage
     }
 
     private double GetTipPercentage()
+{
+    // Check for a valid value in CustomTipEntry first
+    if (!string.IsNullOrEmpty(CustomTipEntry.Text) &&
+        double.TryParse(CustomTipEntry.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var customTip))
     {
-        if (!double.TryParse(CustomTipEntry.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double customTip))
-        {
-            return customTip;
-        }
-
-        if (TipPercentagePicker.SelectedIndex != -1 &&
-            double.TryParse(TipPercentagePicker?.SelectedItem?.ToString()?.TrimEnd('%'), out double pickerTip))
-        {
-            return pickerTip;
-        }
-        return 0.0;
+        return customTip;
     }
+
+    // Check if TipPercentagePicker has a valid selection
+    if (TipPercentagePicker.SelectedIndex != -1 &&
+        double.TryParse(TipPercentagePicker.SelectedItem?.ToString()?.TrimEnd('%'), NumberStyles.Any, CultureInfo.InvariantCulture, out var pickerTip))
+    {
+        return pickerTip;
+    }
+
+    // Default to 0.0 if no valid custom or selected value is found
+    return 0.0;
+}
 
     public void CalculateAndDisplay()
     {
