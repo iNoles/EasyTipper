@@ -1,0 +1,34 @@
+name: .NET MAUI Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Use macos-latest if testing iOS or macOS
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup .NET SDK
+      - name: Setup .NET v9
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0 # Adjust this to match your project's target framework
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Build the project
+      - name: Build project
+        run: dotnet build --no-restore --configuration Release
+
+      # Run unit tests
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release
