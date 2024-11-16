@@ -1,4 +1,4 @@
-name: .NET MAUI Unit Tests
+name: Run Unit Tests for TipCalculator
 
 on:
   push:
@@ -8,27 +8,27 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest # Use macos-latest if testing iOS or macOS
+    runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup .NET SDK
-      - name: Setup .NET v9
+      # Step 2: Setup .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0 # Adjust this to match your project's target framework
+          dotnet-version: 7.0 # Use the appropriate version
 
-      # Restore dependencies
+      # Step 3: Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore TipCalculator.sln
 
-      # Build the project
-      - name: Build project
-        run: dotnet build --no-restore --configuration Release
+      # Step 4: Build the solution
+      - name: Build solution
+        run: dotnet build TipCalculator.sln --no-restore --configuration Release
 
-      # Run unit tests
-      - name: Run tests
-        run: dotnet test --no-build --configuration Release
+      # Step 5: Run tests
+      - name: Run unit tests
+        run: dotnet test TipCalculator.Tests/TipCalculator.Tests.csproj --no-build --configuration Release
