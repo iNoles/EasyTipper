@@ -28,9 +28,6 @@ jobs:
       - name: Install .NET MAUI Workload
         run: |
           dotnet workload install maui --skip-manifest-update
-
-      - name: Restore NuGet Packages
-        run: dotnet restore TipCalculator/TipCalculator.csproj
       
       - name: Run unit tests
         run: dotnet test TipCalculator.Tests/TipCalculator.Tests.csproj
