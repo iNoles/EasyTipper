@@ -25,6 +25,10 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore TipCalculator/TipCalculator.sln
 
+      - name: Install .NET MAUI Workload
+        run: |
+          dotnet workload install maui
+
       # Step 4: Build the solution
       - name: Build solution
         run: dotnet build TipCalculator/TipCalculator.sln --no-restore --configuration Release
