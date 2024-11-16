@@ -20,14 +20,14 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 9.0 # Use the appropriate version
+          
+      - name: Install .NET MAUI Workload
+        run: |
+          dotnet workload install maui
 
       # Step 3: Restore dependencies
       - name: Restore dependencies
         run: dotnet restore TipCalculator/TipCalculator.sln
-
-      - name: Install .NET MAUI Workload
-        run: |
-          dotnet workload install maui
 
       # Step 4: Build the solution
       - name: Build solution
