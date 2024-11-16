@@ -19,15 +19,15 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0 # Use the appropriate version
+          dotnet-version: 9.0 # Use the appropriate version
 
       # Step 3: Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore TipCalculator.sln
+        run: dotnet restore TipCalculator/TipCalculator.sln
 
       # Step 4: Build the solution
       - name: Build solution
-        run: dotnet build TipCalculator.sln --no-restore --configuration Release
+        run: dotnet build TipCalculator/TipCalculator.sln --no-restore --configuration Release
 
       # Step 5: Run tests
       - name: Run unit tests
