@@ -1,17 +1,18 @@
-# Tip Calculator
+# EasyTipper
 
-A simple and intuitive Tip Calculator built with .NET MAUI that helps users easily calculate tip amounts based on various percentages, while also allowing for custom percentages and splitting the bill among multiple people.
+**EasyTipper** is a simple and intuitive app built with **.NET MAUI** to help users calculate tips, split bills, and round amounts effortlessly. Designed with a user-friendly interface, it simplifies dining experiences and ensures accuracy.
 
 ## Features
 
-- **Calculate Tip Amount:** Easily calculate the tip based on predefined percentages (15%, 18%, 20%, 25%) or input a custom tip percentage.
-- **Split the Bill:** Divide the total amount among a chosen number of people.
-- **Round Up Option:** Option to round the tip amount up to the nearest whole number.
-- **User-Friendly Interface:** Clean and straightforward UI for easy navigation and usage.
+- **Calculate Tip Amounts**: Choose from predefined percentages (15%, 18%, 20%, 25%) or input a custom tip percentage
+- **Split the Bill**: Divide the total amount among any number of people
+- **Round Up Option**: Round the tip amount to the nearest whole number for convenience
+- **Real-Time Calculations**: View updated totals instantly as you adjust inputs
+- **Responsive UI**: Optimized for mobile and desktop platforms
 
 ## Screenshots
 
-![TipCalculator Demo](https://raw.githubusercontent.com/iNoles/TipCalculator/main/screenshots/maui-desktop.png)
+![EasyTipper Demo](https://raw.githubusercontent.com/iNoles/EasyTipper/main/screenshots/maui-desktop.png)
 
 ## Technologies Used
 
@@ -21,7 +22,7 @@ A simple and intuitive Tip Calculator built with .NET MAUI that helps users easi
 
 ## Installation
 
-To run this project locally, you need to have the following installed:
+To get started with **EasyTipper**, follow these steps:
 
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - [Visual Studio 2022 or later](https://visualstudio.microsoft.com/vs/) with the .NET MAUI workload
@@ -30,24 +31,27 @@ To run this project locally, you need to have the following installed:
 
 1. Clone the Repository
 ```bash
-git clone https://github.com/iNoles/TipCalculator.git
-cd TipCalculator
+git clone https://github.com/iNoles/EasyTipper.git
+cd EasyTipper
 ```
-2. Open the project in Visual Studio.
-3. Set the target platform (Android, iOS, etc.) from the solution configuration.
-4. Build and run the application on your preferred emulator or physical device.
+2. Open the EasyTipperApp project in Visual Studio
+3. Set the target platform (Android, iOS, Windows, etc.) in the solution configuration
+4. Build and run the app on your emulator, simulator, or physical device
 
 ## Usage
 
-1. Enter the bill amount.
-2. Choose the tip percentage from the dropdown or input a custom tip percentage.
-3. Optionally, select the number of people to split the bill.
-4. Check the option to round up the tip if desired.
-5. View the calculated tip amount, total amount, and per person amount.
+1. Enter the bill amount in the designated field
+2. Select a tip percentage or input a custom tip value
+3. Specify the number of people to split the bill (optional)
+4. Enable the "Round Up" option for simplified rounding (optional)
+5. Instantly view the calculated tip, total bill, and per-person split
 
 ## Testing
 
-Unit tests are included to verify the functionality of the tip calculation logic. To run the tests, you can use the built-in test runner in Visual Studio.
+Thorough unit tests ensure the reliability of the EasyTipper app. To run tests:
+1. Open the EasyTipper.Tests project in Visual Studio
+2. Run the test cases using the built-in test explorer
+3. Validate the results to ensure all features work as expected
 
 ## Contributing
 

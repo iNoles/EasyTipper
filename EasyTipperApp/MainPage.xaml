@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyTipperApp.MainPage">
+    <ScrollView>
+        <StackLayout>
+            <!-- Input for Bill Amount -->
+            <StackLayout Margin="20" Spacing="5">
+                <Label Text="Enter Bill Amount:" FontSize="20" FontAttributes="None" />
+                <Entry
+                    x:Name="AmountEntry"
+                    x:FieldModifier="public"
+                    Placeholder="Enter Bill Amount"
+                    Keyboard="Numeric"
+                    TextChanged="AmountEntry_OnTextChanged"
+                />
+            </StackLayout>
+
+            <!-- Picker for Tip Percentage -->
+            <StackLayout Margin="20, 10, 20, 10" Spacing="5">
+                <Label Text="Select Tip Percentage:" FontSize="20" FontAttributes="None" />
+                <Picker
+                    x:Name="TipPercentagePicker"
+                    Title="{OnPlatform iOS='Choose Tip Percentage', 
+                                       Android='Choose Tip Percentage',
+                                       WinUI='Choose Tip Percentage'
+                    }"
+                    SelectedIndexChanged="TipPercentagePicker_SelectedIndexChanged">
+                    <Picker.Items>
+                        <x:String>15%</x:String>
+                        <x:String>18%</x:String>
+                        <x:String>20%</x:String>
+                        <x:String>25%</x:String>
+                        <x:String>Custom</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+            <!-- Custom Tip Percentage Entry -->
+            <StackLayout Margin="20" Spacing="5">
+                <Entry
+                    x:Name="CustomTipEntry"
+                    x:FieldModifier="public"
+                    Placeholder="Enter Custom Tip Percentage"
+                    Keyboard="Numeric"
+                    IsVisible="False"
+                    TextChanged="CustomTipEntry_TextChanged"
+                />
+            </StackLayout>
+
+            <!-- Checkbox for Rounding Up the Tip -->
+            <StackLayout Margin="20, 0, 20, 10" Orientation="Horizontal" Spacing="5">
+                <Label Text="Round up tip?" FontSize="20" FontAttributes="None" />
+                <CheckBox CheckedChanged="CheckBox_OnCheckedChanged"/>
+            </StackLayout>
+
+            <!-- Display for Tip Amount -->
+            <StackLayout Margin="20, 0, 20, 10" Orientation="Horizontal" Spacing="5">
+                <Label Text="Tip Amount:" FontSize="36" FontAttributes="Bold" />
+                <Label
+                    x:Name="TipLabel"
+                    x:FieldModifier="public"
+                    FontSize="36"
+                    FontAttributes="Bold" />
+            </StackLayout>
+
+            <!-- Display for Total Amount -->
+            <StackLayout Margin="20, 0, 20, 10" Orientation="Horizontal" Spacing="5">
+                <Label Text="Total Amount:" FontSize="36" FontAttributes="Bold" />
+                <Label
+                    x:Name="TotalLabel"
+                    x:FieldModifier="public"
+                    FontSize="36"
+                    FontAttributes="Bold" />
+            </StackLayout>
+
+            <!-- Picker for Splitting the Bill -->
+            <StackLayout Margin="20" Orientation="Horizontal" Spacing="5">
+                <Label Text="Split Bill?" FontSize="20" FontAttributes="None" />
+                <Picker
+                    Title="{OnPlatform iOS='Split the bill up', 
+                                       Android='Split the bill up',
+                                       WinUI='Split the bill up'
+                    }"
+                    WidthRequest="150"
+                    SelectedIndexChanged="SplitPicker_OnSelectedIndexChanged"
+                    HorizontalOptions="StartAndExpand">
+                    <Picker.Items>
+                        <x:String>No</x:String>
+                        <x:String>2 way</x:String>
+                        <x:String>3 way</x:String>
+                        <x:String>4 way</x:String>
+                        <x:String>5 way</x:String>
+                        <x:String>6 way</x:String>
+                        <x:String>7 way</x:String>
+                        <x:String>8 way</x:String>
+                        <x:String>9 way</x:String>
+                        <x:String>10 way</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+            <!-- Display for Amount Per Person -->
+            <StackLayout Margin="20" Orientation="Horizontal" Spacing="5">
+                <Label x:Name="PersonLabel" Text="Per Person:" FontSize="20" FontAttributes="None" />
+                <Label x:Name="PersonCurrencyLabel" FontSize="20" FontAttributes="None" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
