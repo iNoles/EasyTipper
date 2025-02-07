@@ -15,49 +15,45 @@ public partial class MainPage : ContentPage
 
     private double GetTipPercentage()
     {
-        // Try to get a custom tip if available
-        if (!string.IsNullOrEmpty(CustomTipEntry.Text) && 
+        // Check for a valid value in CustomTipEntry first
+        if (!string.IsNullOrEmpty(CustomTipEntry.Text) &&
             double.TryParse(CustomTipEntry.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var customTip))
         {
             return customTip;
         }
 
-        // Check the selected tip percentage
-        if (TipPercentagePicker.SelectedIndex >= 0 && 
-            double.TryParse(TipPercentagePicker.SelectedItem?.ToString()?.TrimEnd('%'), NumberStyles.Any, CultureInfo.InvariantCulture, out var selectedTip))
+        // Check if TipPercentagePicker has a valid selection
+        if (TipPercentagePicker.SelectedIndex != -1 &&
+            double.TryParse(TipPercentagePicker.SelectedItem?.ToString()?.TrimEnd('%'), NumberStyles.Any, CultureInfo.InvariantCulture, out var pickerTip))
         {
-            return selectedTip;
+            return pickerTip;
         }
 
-        // Default to 0% if neither a custom value nor a selection exists
+        // Default to 0.0 if no valid custom or selected value is found
         return 0.0;
     }
 
     public void CalculateAndDisplay()
     {
-        // Attempt to parse the bill amount, default to 0 if invalid
-        if (!double.TryParse(AmountEntry.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var billAmount) || billAmount <= 0)
+        if (!double.TryParse(AmountEntry.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var billAmount))
         {
             billAmount = 0.0;
-            TipLabel.Text = TotalLabel.Text = PersonCurrencyLabel.Text = "0.00"; // Clear labels when input is invalid
-            return;
         }
 
         var tipPercent = GetTipPercentage();
         var tipAmount = tipPercent / 100 * billAmount;
-
         if (_roundUp)
         {
             tipAmount = Math.Ceiling(tipAmount);
         }
 
-        // Total amount includes bill + tip
+        // Total amount is the bill plus the tip
         var totalAmount = billAmount + tipAmount;
 
-        // Split total if necessary
+        // Calculate the amount per person if splitting
         var splitAmount = totalAmount / _split;
 
-        // Update UI based on the calculated values
+        // Update the UI labels
         UpdateUI(tipAmount, totalAmount, splitAmount);
     }
 
@@ -66,7 +62,6 @@ public partial class MainPage : ContentPage
         TipLabel.Text = tipAmount.ToString(CurrencyFormat);
         TotalLabel.Text = totalAmount.ToString(CurrencyFormat);
 
-        // Handle visibility of the "Per Person" labels based on whether the bill is being split
         var isSplitting = _split > 1;
         PersonLabel.IsVisible = isSplitting;
         PersonCurrencyLabel.IsVisible = isSplitting;
@@ -84,28 +79,68 @@ public partial class MainPage : ContentPage
 
     private void SplitPicker_OnSelectedIndexChanged(object? sender, EventArgs e)
     {
-        // Handle invalid index and update split accordingly
         var picker = sender as Picker;
-        _split = picker?.SelectedIndex >= 0 ? picker.SelectedIndex + 1 : 1; // Default to 1 if invalid index
 
+        // Ensure selectedIndex is not null before using it
+        if (picker?.SelectedIndex != null && picker.SelectedIndex >= 0)
+        {
+            _split = picker.SelectedIndex + 1;
+        }
+        else
+        {
+            _split = 1; // Default to 1 if the selection is invalid
+        }
         CalculateAndDisplay();
     }
 
     private void CheckBox_OnCheckedChanged(object? sender, CheckedChangedEventArgs e)
     {
-        _roundUp = e.Value;
+        var checkbox = sender as CheckBox;
+        _roundUp = checkbox?.IsChecked ?? false;
         CalculateAndDisplay();
     }
 
     private void TipPercentagePicker_SelectedIndexChanged(object? sender, EventArgs e)
     {
-        // Show custom tip entry if the "Custom" option is selected
-        CustomTipEntry.IsVisible = TipPercentagePicker.SelectedIndex == 4;
-        CalculateAndDisplay(); // Recalculate on tip change
+        var picker = sender as Picker;
+        if (picker?.SelectedIndex == 4)
+        {
+            CustomTipEntry.IsVisible = true;
+        }
+        else
+        {
+            CustomTipEntry.IsVisible = false;
+            CalculateAndDisplay(); // Update the calculation
+        }
     }
 
     private void CustomTipEntry_TextChanged(object? sender, TextChangedEventArgs e)
     {
         CalculateAndDisplay();
+    }
+
+    // Reset Button Logic
+    public void OnResetButtonClicked(object sender, EventArgs e)
+    {
+        // Clear the bill amount and custom tip entry
+        AmountEntry.Text = string.Empty;
+        CustomTipEntry.Text = string.Empty;
+
+        // Reset the picker to the default index (first one)
+        TipPercentagePicker.SelectedIndex = 0;
+        
+        // Reset the split picker to the default value (1 way)
+        SplitPicker.SelectedIndex = 0;
+
+        // Uncheck the round-up checkbox
+        CheckBox.IsChecked = false;
+
+        // Reset the calculated values
+        TipLabel.Text = TotalLabel.Text = PersonCurrencyLabel.Text = "0.00";
+        PersonLabel.IsVisible = PersonCurrencyLabel.IsVisible = false;
+
+        // Optionally reset _split and _roundUp as well
+        _split = 1;
+        _roundUp = false;
     }
 }
