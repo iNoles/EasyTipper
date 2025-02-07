@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EasyTipperApp.MainPage">
@@ -104,6 +104,17 @@
             <StackLayout Margin="20" Orientation="Horizontal" Spacing="5">
                 <Label x:Name="PersonLabel" Text="Per Person:" FontSize="20" FontAttributes="None" />
                 <Label x:Name="PersonCurrencyLabel" FontSize="20" FontAttributes="None" />
+            </StackLayout>
+
+            <!-- Reset Button -->
+            <StackLayout Margin="20" Orientation="Horizontal" Spacing="5">
+                <Button
+                    Text="Reset"
+                    FontSize="20"
+                    Clicked="OnResetButtonClicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                />
             </StackLayout>
         </StackLayout>
     </ScrollView>
